@@ -200,7 +200,7 @@ class Citizen:
         self.var_com_search=StringVar()
         com_txt_search=ttk.Combobox(search_frame,textvariable=self.var_com_search,state="readonly",font=("arial",12,"bold"),width=18)
 
-        com_txt_search['value']=("Select Option","phone","id_proof")
+        com_txt_search['value']=("Select Option","citizen_phone","citizen_aadhar")
         com_txt_search.current(0)
         com_txt_search.grid(row=0,column=1,sticky=W,padx=5)
 
@@ -349,25 +349,22 @@ class Citizen:
                 
                 update=messagebox.askyesno('Update','Are you sure to update this citizen data?')
                 if update>0:
-                    conn=mysql.connector.connect(host='localhost',username='root', password='Abhinav@03', database='govfund')
+                    conn=mysql.connector.connect(host='localhost',username='root', password='', database='govfund')
                     my_cursor=conn.cursor()
-                    my_cursor.execute('update citizen set citizen_name=%s,citizen_age=%s,citizen_dob=%s,Email=%s,Address=%s,Married_status=%s,DOB=%s,DOJ=%s,id_proof_type=%s,Gender=%s,Phone=%s,Country=%s,Salary=%s where id_proof=%s',(
+                    my_cursor.execute('update citizen set citizen_name=%s,citizen_age=%s,citizen_dob=%s,citizen_phone=%s,citizen_aadhar=%s,citizen_pan=%s,citizen_occupation=%s,citizen_disability=%s,citizen_city=%s,citizen_bank_accno=%s,citizen_bank_ifsc=%s where citizen_aadhar=%s',(
                                                                                                                                                                                                                                     
-                                                                                                                                                                                                                                self.var_id.get(),
-                                                                                                                                                                                                                                self.var_name.get(),
-                                                                                                                                                                                                                                self.var_age.get(),
-                                                                                                                                                                                                                                self.var_bankacc.get(),
-                                                                                                                                                                                                                                self.var_address.get(),
-                                                                                                                                                                                                                                self.var_occupation.get(),
-                                                                                                                                                                                                                                self.var_dob.get(),
-                                                                                                                                                                                                                                self.var_doj.get(),
-                                                                                                                                                                                                                                self.var_aadhar.get(),
-                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                self.var_city.get(),
-                                                                                                                                                                                                                                self.var_phone.get(),
-                                                                                                                                                                                                                                self.var_country.get(),
-                                                                                                                                                                                                                                self.var_salary.get(),  
-                                                                                                                                                                                                                                self.var_pan.get()                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                13,
+                                                                                                                self.var_name.get(),
+                                                                                                                12,
+                                                                                                                self.var_dob.get(),
+                                                                                                                self.var_phone.get(),
+                                                                                                                self.var_aadhar.get(),
+                                                                                                                self.var_pan.get(),
+                                                                                                                self.var_occupation.get(),
+                                                                                                                self.var_disability.get(),
+                                                                                                                self.var_city.get(),
+                                                                                                                self.var_bankacc.get(),
+                                                                                                                self.var_bankifsc.get(),                                                                                                                                                                                                                         
 
 
                  
@@ -379,7 +376,7 @@ class Citizen:
                 conn.commit() 
                 self.fetch_data()
                 conn.close()
-                messagebox.showinfo('Success','citizen Successfully Updated!', parent=self.root)
+                messagebox.showinfo('Success','Citizen Successfully Updated!', parent=self.root)
 
             except Exception as es:    
                 messagebox.showerror('Error',f'Due to:{str(es)}', parent=self.root)   
@@ -393,9 +390,9 @@ class Citizen:
             try:
                 Delete=messagebox.askyesno('Delete','Are you sure to delete this citizen data?',parent=self.root)
                 if Delete>0:
-                    conn=mysql.connector.connect(host='localhost',username='root', password='Abhinav@03', database='govfund')
+                    conn=mysql.connector.connect(host='localhost',username='root', password='', database='govfund')
                     my_cursor=conn.cursor()
-                    sql='delete from citizen where id_proof=%s'
+                    sql='delete from citizen where citizen_aadhar=%s'
                     value=(self.var_pan.get(),)
                     my_cursor.execute(sql, value)
                 else:
@@ -412,20 +409,20 @@ class Citizen:
     # Clear
 
     def reset_data(self):
-        self.var_id.set("Select Department")
+
         self.var_name.set("")
-        self.var_age.set("")
+        self.var_aadhar.set("")
         self.var_bankacc.set("")
-        self.var_address.set("")
-        self.var_occupation.set("Married")
-        self.var_dob.set("")
-        self.var_doj.set("")
-        self.var_aadhar.set("Select ID Proof")
-        self.var_pan.set("")
         self.var_city.set("")
+        self.var_occupation.set("")
+        self.var_dob.set("")
+        self.var_bankifsc.set("")
+        # self.var_email.set()
+        # self.var_gender.set()
+        self.var_pan.set("")
         self.var_phone.set("")
-        self.var_country.set("")
-        self.var_salary.set("")
+        self.var_disability.set(Y)
+        self.var_age.set("")
 
     # Search
     def search_data(self):
@@ -433,7 +430,7 @@ class Citizen:
             messagebox.showerror('Error','Please Select Option')
         else:
             try:
-                conn=mysql.connector.connect(host='localhost',username='root', password='Abhinav@03', database='govfund')
+                conn=mysql.connector.connect(host='localhost',username='root', password='', database='govfund')
                 my_cursor=conn.cursor()
                 my_cursor.execute('select * from citizen where ' +str(self.var_com_search.get()) +" LIKE '%" +str(self.var_search.get() +"%'"))
                 rows=my_cursor.fetchall()
