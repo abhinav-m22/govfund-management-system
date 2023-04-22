@@ -5,6 +5,11 @@ from PIL import Image, ImageTk
 import mysql.connector
 from tkinter import messagebox
 
+
+MySQLPassword=''
+DatabaseName=''
+Username=''
+
 class Citizen:
     def __init__(self,root):
         self.root=root
@@ -275,7 +280,7 @@ class Citizen:
         #     messagebox.showerror('Error','All Fields are required')
         # else:
             try:
-                conn=mysql.connector.connect(host='localhost',username='root', password='', database='govfund')
+                conn=mysql.connector.connect(host='localhost',user=Username, password=MySQLPassword, database=DatabaseName)
                 my_cursor=conn.cursor()
                 self.var_id=13
                 my_cursor.execute('insert into citizen values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(
@@ -308,7 +313,7 @@ class Citizen:
     # Fetch data
 
     def fetch_data(self):
-        conn=mysql.connector.connect(host='localhost',username='root', password='', database='govfund')
+        conn=mysql.connector.connect(host='localhost',user=Username, password=MySQLPassword, database=DatabaseName)
         my_cursor=conn.cursor()
         my_cursor.execute('select * from citizen')
         data=my_cursor.fetchall()
@@ -349,7 +354,7 @@ class Citizen:
                 
                 update=messagebox.askyesno('Update','Are you sure to update this citizen data?')
                 if update>0:
-                    conn=mysql.connector.connect(host='localhost',username='root', password='', database='govfund')
+                    conn=mysql.connector.connect(host='localhost',user=Username, password=MySQLPassword, database=DatabaseName)
                     my_cursor=conn.cursor()
                     my_cursor.execute('update citizen set citizen_name=%s,citizen_age=%s,citizen_dob=%s,citizen_phone=%s,citizen_aadhar=%s,citizen_pan=%s,citizen_occupation=%s,citizen_disability=%s,citizen_city=%s,citizen_bank_accno=%s,citizen_bank_ifsc=%s where citizen_aadhar=%s',(
                                                                                                                                                                                                                                     
@@ -390,7 +395,7 @@ class Citizen:
             try:
                 Delete=messagebox.askyesno('Delete','Are you sure to delete this citizen data?',parent=self.root)
                 if Delete>0:
-                    conn=mysql.connector.connect(host='localhost',username='root', password='', database='govfund')
+                    conn=mysql.connector.connect(host='localhost',user=Username, password=MySQLPassword, database=DatabaseName)
                     my_cursor=conn.cursor()
                     sql='delete from citizen where citizen_aadhar=%s'
                     value=(self.var_pan.get(),)
@@ -430,7 +435,7 @@ class Citizen:
             messagebox.showerror('Error','Please Select Option')
         else:
             try:
-                conn=mysql.connector.connect(host='localhost',username='root', password='', database='govfund')
+                conn=mysql.connector.connect(host='localhost',user=Username, password=MySQLPassword, database=DatabaseName)
                 my_cursor=conn.cursor()
                 my_cursor.execute('select * from citizen where ' +str(self.var_com_search.get()) +" LIKE '%" +str(self.var_search.get() +"%'"))
                 rows=my_cursor.fetchall()
