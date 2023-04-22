@@ -6,6 +6,11 @@ import mysql.connector
 from tkinter import messagebox
 
 
+MySQLPassword = ''
+DatabaseName = ''
+Username = ''
+
+
 class Citizen:
     def __init__(self, root):
         self.root = root
@@ -305,12 +310,12 @@ class Citizen:
         # if self.var_id.get()=="" or self.var_bankacc.get()=="":
         #     messagebox.showerror('Error','All Fields are required')
         # else:
-        try:
-            conn = mysql.connector.connect(
-                host='localhost', username='root', password='2424', database='govfund')
-            my_cursor = conn.cursor()
-            self.var_id = 13
-            my_cursor.execute('insert into citizen values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', (
+            try:
+                conn = mysql.connector.connect(
+                    host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
+                my_cursor = conn.cursor()
+                self.var_id = 13
+                my_cursor.execute('insert into citizen values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', (
 
                 # Variables
                 13,
@@ -335,7 +340,7 @@ class Citizen:
             messagebox.showinfo(
                 'Success', 'citizen has been addded!', parent=self.root)
 
-        except Exception as es:
+            except Exception as es:
             messagebox.showerror(
                 'Error', f'Due to:{str(es)}', parent=self.root)
 
@@ -343,7 +348,7 @@ class Citizen:
 
     def fetch_data(self):
         conn = mysql.connector.connect(
-            host='localhost', username='root', password='2424', database='govfund')
+            host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
         my_cursor = conn.cursor()
         my_cursor.execute('select * from citizen')
         data = my_cursor.fetchall()
@@ -380,25 +385,41 @@ class Citizen:
         # if self.var_id.get()=="" or self.var_bankacc.get()=="":
         #     messagebox.showerror('Error','All Fields are required')
         # else:
-        try:
+            try:
 
-            update = messagebox.askyesno(
-                'Update', 'Are you sure to update this citizen data?')
-            if update > 0:
-                conn = mysql.connector.connect(
-                    host='localhost', username='root', password='2424', database='govfund')
-                my_cursor = conn.cursor()
-                my_cursor.execute('update citizen set citizen_name=%s,citizen_age=%s,citizen_dob=%s,citizen_phone=%s,citizen_aadhar=%s,citizen_pan=%s,citizen_occupation=%s,citizen_disability=%s,citizen_city=%s,citizen_bank_accno=%s,citizen_bank_ifsc=%s where citizen_aadhar=%s', (
-                ))
+                update = messagebox.askyesno(
+                    'Update', 'Are you sure to update this citizen data?')
+                if update > 0:
+                    conn = mysql.connector.connect(
+                        host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
+                    my_cursor = conn.cursor()
+                    my_cursor.execute('update citizen set citizen_name=%s,citizen_age=%s,citizen_dob=%s,citizen_phone=%s,citizen_aadhar=%s,citizen_pan=%s,citizen_occupation=%s,citizen_disability=%s,citizen_city=%s,citizen_bank_accno=%s,citizen_bank_ifsc=%s where citizen_aadhar=%s', (
 
-            else:
-                if not update:
-                    return
-            conn.commit()
-            self.fetch_data()
-            conn.close()
-            messagebox.showinfo(
-                'Success', 'Citizen Successfully Updated!', parent=self.root)
+                                                                                                                                                                                                                                13,
+                                                                                                                self.var_name.get(),
+                                                                                                                12,
+                                                                                                                self.var_dob.get(),
+                                                                                                                self.var_phone.get(),
+                                                                                                                self.var_aadhar.get(),
+                                                                                                                self.var_pan.get(),
+                                                                                                                self.var_occupation.get(),
+                                                                                                                self.var_disability.get(),
+                                                                                                                self.var_city.get(),
+                                                                                                                self.var_bankacc.get(),
+                                                                                                                self.var_bankifsc.get(),
+
+
+
+                                                                                                                                                                                                                                ))
+
+                else:
+                    if not update:
+                        return
+                conn.commit()
+                self.fetch_data()
+                conn.close()
+                messagebox.showinfo(
+                    'Success', 'Citizen Successfully Updated!', parent=self.root)
 
         except Exception as es:
             messagebox.showerror(
@@ -410,24 +431,21 @@ class Citizen:
         # if self.var_pan.get()=="":
         #     messagebox.showerror('Error','All fields are required')
         # else:
-        try:
-            Delete = messagebox.askyesno(
-                'Delete', 'Are you sure to delete this citizen data?', parent=self.root)
-            if Delete > 0:
-                conn = mysql.connector.connect(
-                    host='localhost', username='root', password='2424', database='govfund')
-                my_cursor = conn.cursor()
-                sql = 'delete from citizen where citizen_aadhar=%s'
-                value = (self.var_pan.get(),)
-                my_cursor.execute(sql, value)
-            else:
-                if not Delete:
-                    return
-            conn.commit()
-            self.fetch_data()
-            conn.close()
-            messagebox.showinfo(
-                'Delete', 'citizen Successfully Deleted!', parent=self.root)
+            try:
+                Delete=messagebox.askyesno('Delete','Are you sure to delete this citizen data?',parent=self.root)
+                if Delete>0:
+                    conn=mysql.connector.connect(host='localhost',user=Username, password=MySQLPassword, database=DatabaseName)
+                    my_cursor=conn.cursor()
+                    sql='delete from citizen where citizen_aadhar=%s'
+                    value=(self.var_pan.get(),)
+                    my_cursor.execute(sql, value)
+                else:
+                    if not Delete:
+                        return
+                conn.commit()
+                self.fetch_data()
+                conn.close()
+                messagebox.showinfo('Delete','citizen Successfully Deleted!', parent=self.root)
 
         except Exception as es:
             messagebox.showerror(
@@ -457,15 +475,12 @@ class Citizen:
             messagebox.showerror('Error', 'Please Select Option')
         else:
             try:
-                conn = mysql.connector.connect(
-                    host='localhost', username='root', password='2424', database='govfund')
-                my_cursor = conn.cursor()
-                my_cursor.execute('select * from citizen where ' + str(
-                    self.var_com_search.get()) + " LIKE '%" + str(self.var_search.get() + "%'"))
-                rows = my_cursor.fetchall()
-                if len(rows) != 0:
-                    self.citizen_table.delete(
-                        *self.citizen_table.get_children())
+                conn=mysql.connector.connect(host='localhost',user=Username, password=MySQLPassword, database=DatabaseName)
+                my_cursor=conn.cursor()
+                my_cursor.execute('select * from citizen where ' +str(self.var_com_search.get()) +" LIKE '%" +str(self.var_search.get() +"%'"))
+                rows=my_cursor.fetchall()
+                if len(rows)!=0:
+                    self.citizen_table.delete(*self.citizen_table.get_children())
                     for i in rows:
                         self.citizen_table.insert("", END, values=i)
                 conn.commit()
