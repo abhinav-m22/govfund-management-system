@@ -31,8 +31,8 @@ from tkinter import *
 from tkinter import messagebox
 
 
-MySQLPassword = 'akshay@2003'
-DatabaseName = 'mydb'
+MySQLPassword = 'manas'
+DatabaseName = 'cp'
 Username = 'root'
 
 

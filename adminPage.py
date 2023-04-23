@@ -32,6 +32,8 @@ class Admin:
         self.var_bankacc = StringVar()
         self.var_bankifsc = StringVar()
 
+
+
         # lbl_tile = Label(self.root, text="Admin", font=(
         #     'Microsoft YaHei UI Light', 37, 'bold'), fg='darkblue', bg='white')
         # lbl_tile.place(x=0, y=0, width=1530, height=50)
@@ -219,30 +221,214 @@ class Admin:
         # btn_clear.grid(row=3, column=0, padx=1, pady=5)
 
         def loanProcedure():
-            import choosingScheme
+            table_frame = Frame(down_frame)
+            table_frame.place(x=0, y=0, width=1470, height=500)
+
+            scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
+            scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
+
+            self.citizen_table = ttk.Treeview(table_frame, column=("citizen_aadhar","citizen_name", "citizen_loan_type",  "citizen_loan_amount","citizen_occupation", "citizen_bank_accno", "citizen_bank_ifsc", "citizen_city",
+                                          "citizen_pan", "citizen_phone"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+            
+            scroll_x.pack(side=BOTTOM, fill=X)
+            scroll_y.pack(side=RIGHT, fill=Y)
+            scroll_x.config(command=self.citizen_table.xview)
+            scroll_y.config(command=self.citizen_table.yview)
+
+            self.citizen_table.heading('citizen_aadhar', text='Aadhar')
+            self.citizen_table.heading('citizen_name', text='Name')
+            self.citizen_table.heading('citizen_loan_type', text='Loan-Type')
+            self.citizen_table.heading('citizen_loan_amount', text='Loan Amount')
+            self.citizen_table.heading('citizen_occupation', text='Occupation')
+            self.citizen_table.heading('citizen_bank_accno', text='Bank Acc No')
+            self.citizen_table.heading('citizen_bank_ifsc', text='IFSC Code')
+            self.citizen_table.heading('citizen_city', text='City')
+            self.citizen_table.heading('citizen_pan', text='PAN')
+            self.citizen_table.heading('citizen_phone', text='Phone No')
+
+            self.citizen_table['show'] = 'headings'
+            
+            self.citizen_table.column('citizen_aadhar',width=100 )
+            self.citizen_table.column('citizen_name',width=100 )
+            self.citizen_table.column('citizen_loan_type',width=100 )
+            self.citizen_table.column('citizen_loan_amount',width=100 )
+            self.citizen_table.column('citizen_occupation',width=100 )
+            self.citizen_table.column('citizen_bank_accno',width=100 )
+            self.citizen_table.column('citizen_bank_ifsc',width=100 )
+            self.citizen_table.column('citizen_city',width=100 )
+            self.citizen_table.column('citizen_pan', width=100)
+            self.citizen_table.column('citizen_phone', width=100)
+
+            self.citizen_table.pack(fill=BOTH, expand=1)
+
+            self.citizen_table.bind("<ButtonRelease>", self.get_cursor)
+
+            self.fetch_data_loan()
+
 
         def pensionProcedure():
-            import choosingScheme
+            table_frame = Frame(down_frame)
+            table_frame.place(x=0, y=0, width=1470, height=500)
+
+            scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
+            scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
+
+            self.citizen_table = ttk.Treeview(table_frame, column=("citizen_aadhar","citizen_name", "citizen_age",  "citizen_ret_year","citizen_salary", "citizen_bank_accno", "citizen_bank_ifsc", "citizen_city",
+                                          "citizen_pan", "citizen_phone"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+
+            # select citizen.citizen_aadhar, citizen.citizen_name, pension.citizen_age, pension.citizen_ret_year,pension.citizen_salary, citizen.citizen_bank_accno, citizen.citizen_bank_ifsc, citizen.citizen_city,citizen.citizen_pan, citizen.citizen_phone from pension inner join citizen on citizen.citizen_aadhar=pension.citizen_aadhar;
+
+            scroll_x.pack(side=BOTTOM, fill=X)
+            scroll_y.pack(side=RIGHT, fill=Y)
+            scroll_x.config(command=self.citizen_table.xview)
+            scroll_y.config(command=self.citizen_table.yview)
+
+            self.citizen_table.heading('citizen_aadhar', text='Aadhar')
+            self.citizen_table.heading('citizen_name', text='Name')
+            self.citizen_table.heading('citizen_age', text='Age')
+            self.citizen_table.heading('citizen_ret_year', text='Retirement Year')
+            self.citizen_table.heading('citizen_salary', text='Salary')
+            self.citizen_table.heading('citizen_bank_accno', text='Bank Acc No')
+            self.citizen_table.heading('citizen_bank_ifsc', text='IFSC Code')
+            self.citizen_table.heading('citizen_city', text='City')
+            self.citizen_table.heading('citizen_pan', text='PAN')
+            self.citizen_table.heading('citizen_phone', text='Phone No')
+
+            self.citizen_table['show'] = 'headings'
+            
+            self.citizen_table.column('citizen_aadhar',width=100 )
+            self.citizen_table.column('citizen_name',width=100 )
+            self.citizen_table.column('citizen_age',width=100 )
+            self.citizen_table.column('citizen_ret_year',width=100 )
+            self.citizen_table.column('citizen_salary',width=100 )
+            self.citizen_table.column('citizen_bank_accno',width=100 )
+            self.citizen_table.column('citizen_bank_ifsc',width=100 )
+            self.citizen_table.column('citizen_city',width=100 )
+            self.citizen_table.column('citizen_pan', width=100)
+            self.citizen_table.column('citizen_phone', width=100)
+
+            self.citizen_table.pack(fill=BOTH, expand=1)
+
+            self.citizen_table.bind("<ButtonRelease>", self.get_cursor)
+
+            self.fetch_data_pension()
 
         def scholarshipProcedure():
-            import choosingScheme
+            table_frame = Frame(down_frame)
+            table_frame.place(x=0, y=0, width=1470, height=500)
+
+            scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
+            scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
+
+            self.citizen_table = ttk.Treeview(table_frame, column=("citizen_aadhar","citizen_name", "citizen_caste",  "marks","citizen_gender", "citizen_bank_accno", "citizen_bank_ifsc", "citizen_city",
+                                          "citizen_age", "citizen_phone"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+
+            scroll_x.pack(side=BOTTOM, fill=X)
+            scroll_y.pack(side=RIGHT, fill=Y)
+            scroll_x.config(command=self.citizen_table.xview)
+            scroll_y.config(command=self.citizen_table.yview)
+
+            self.citizen_table.heading('citizen_aadhar', text='Aadhar')
+            self.citizen_table.heading('citizen_name', text='Name')
+            self.citizen_table.heading('citizen_caste', text='Caste')
+            self.citizen_table.heading('marks', text='Marks Obtained')
+            self.citizen_table.heading('citizen_gender', text='Gender')
+            self.citizen_table.heading('citizen_bank_accno', text='Bank Acc No')
+            self.citizen_table.heading('citizen_bank_ifsc', text='IFSC Code')
+            self.citizen_table.heading('citizen_city', text='City')
+            self.citizen_table.heading('citizen_age', text='Age')
+            self.citizen_table.heading('citizen_phone', text='Phone No')
+
+            self.citizen_table['show'] = 'headings'
+            
+            self.citizen_table.column('citizen_aadhar',width=100 )
+            self.citizen_table.column('citizen_name',width=100 )
+            self.citizen_table.column('citizen_caste',width=100 )
+            self.citizen_table.column('marks',width=100 )
+            self.citizen_table.column('citizen_gender',width=100 )
+            self.citizen_table.column('citizen_bank_accno',width=100 )
+            self.citizen_table.column('citizen_bank_ifsc',width=100 )
+            self.citizen_table.column('citizen_city',width=100 )
+            self.citizen_table.column('citizen_age', width=100)
+            self.citizen_table.column('citizen_phone', width=100)
+
+            self.citizen_table.pack(fill=BOTH, expand=1)
+
+            self.citizen_table.bind("<ButtonRelease>", self.get_cursor)
+
+            self.fetch_data_scholarship()
 
         def showCitizens():
-            import choosingScheme
+            table_frame = Frame(down_frame)
+            table_frame.place(x=0, y=0, width=1470, height=500)
+
+            scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
+            scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
+
+            self.citizen_table = ttk.Treeview(table_frame, column=("citizen_name", "citizen_age",  "citizen_dob","citizen_gender", "citizen_phone", "citizen_email", "citizen_aadhar","citizen_pan",
+                                          "citizen_occupation", "citizen_disability", "citizen_city", "citizen_bank_accno", "citizen_bank_ifsc"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+            scroll_x.pack(side=BOTTOM, fill=X)
+            scroll_y.pack(side=RIGHT, fill=Y)
+            scroll_x.config(command=self.citizen_table.xview)
+            scroll_y.config(command=self.citizen_table.yview)
+
+            # self.citizen_table.heading('citizen_id', text='ID')
+            self.citizen_table.heading('citizen_name', text='Name')
+            self.citizen_table.heading('citizen_age', text='Age')
+            self.citizen_table.heading('citizen_dob', text='DOB')
+            self.citizen_table.heading('citizen_gender', text='Gender')
+            self.citizen_table.heading('citizen_phone', text='Phone No')
+            self.citizen_table.heading('citizen_email', text='Email')
+            self.citizen_table.heading('citizen_aadhar', text='Aadhar')
+            self.citizen_table.heading('citizen_pan', text='PAN')
+            self.citizen_table.heading('citizen_occupation', text='Occupation')
+            self.citizen_table.heading('citizen_disability', text='Disability')
+            self.citizen_table.heading('citizen_city', text='City')
+            self.citizen_table.heading('citizen_bank_accno', text='Bank Acc No')
+            self.citizen_table.heading('citizen_bank_ifsc', text='IFSC Code')
+            # self.citizen_table.heading('country', text='Country')
+            # self.citizen_table.heading('salary', text='Salary')
+
+            self.citizen_table['show'] = 'headings'
+            # self.citizen_table.column('citizen_id', width=100)
+            self.citizen_table.column('citizen_name', width=100)
+            self.citizen_table.column('citizen_age', width=100)
+            self.citizen_table.column('citizen_dob', width=100)
+            self.citizen_table.column('citizen_phone', width=100)
+            self.citizen_table.column('citizen_aadhar', width=100)
+            self.citizen_table.column('citizen_pan', width=100)
+            self.citizen_table.column('citizen_occupation', width=100)
+            self.citizen_table.column('citizen_disability', width=100)
+            self.citizen_table.column('citizen_city', width=100)
+            self.citizen_table.column('citizen_bank_accno', width=100)
+            self.citizen_table.column('citizen_bank_ifsc', width=100)
+            # self.citizen_table.column('country', width=100)
+            # self.citizen_table.column('salary', width=100)
+
+            self.citizen_table.pack(fill=BOTH, expand=1)
+
+            self.citizen_table.bind("<ButtonRelease>", self.get_cursor)
+
+            self.fetch_data_citizen()
+            
 
         img_logo = Image.open("images/history.png")
         img_logo = img_logo.resize((50, 50), Image.ANTIALIAS)
         self.photo_logo = ImageTk.PhotoImage(img_logo)
         self.my_button = Button(root, image=self.photo_logo, command=showCitizens, bd=0)
         self.my_button.place(x=1400, y=50, width=50, height=50)
+
         Button(root, width=25, pady=7, text='Loan', bg='#57a1f8',
-               fg='white', border=0, font=('Microsoft YaHei UI Light', 16, 'bold'), command=self.add_data) .place(x=30, y=150)
+               fg='white', border=0, font=('Microsoft YaHei UI Light', 16, 'bold'), command=loanProcedure) .place(x=30, y=150)
+        
         Button(root, width=25, pady=7, text='Pension', bg='#57a1f8',
-               fg='white', border=0, font=('Microsoft YaHei UI Light', 16, 'bold'), command=self.add_data) .place(x=405, y=150)
+               fg='white', border=0, font=('Microsoft YaHei UI Light', 16, 'bold'), command=pensionProcedure) .place(x=405, y=150)
+        
         Button(root, width=25, pady=7, text='Scholarship', bg='#57a1f8',
-               fg='white', border=0, font=('Microsoft YaHei UI Light', 16, 'bold'), command=self.add_data) .place(x=780, y=150)
+               fg='white', border=0, font=('Microsoft YaHei UI Light', 16, 'bold'), command=scholarshipProcedure) .place(x=780, y=150)
+        
         Button(root, width=25, pady=7, text='Citizen', bg='#57a1f8',
-               fg='white', border=0, font=('Microsoft YaHei UI Light', 16, 'bold'), command=self.add_data) .place(x=1155, y=150)
+               fg='white', border=0, font=('Microsoft YaHei UI Light', 16, 'bold'), command=showCitizens) .place(x=1155, y=150)
 
         # Down Frame
         down_frame = LabelFrame(Main_frame, bg='white',
@@ -284,57 +470,67 @@ class Admin:
 #         # =========== Citizen table===========
 
 #         # Table frame
-        table_frame = Frame(down_frame)
-        table_frame.place(x=0, y=0, width=1470, height=500)
 
-        scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
-        scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
 
-        self.citizen_table = ttk.Treeview(table_frame, column=("citizen_name", "citizen_age",  "citizen_dob","citizen_gender", "citizen_phone", "citizen_email", "citizen_aadhar","citizen_pan",
-                                          "citizen_occupation", "citizen_disability", "citizen_city", "citizen_bank_accno", "citizen_bank_ifsc"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
-        scroll_x.pack(side=BOTTOM, fill=X)
-        scroll_y.pack(side=RIGHT, fill=Y)
-        scroll_x.config(command=self.citizen_table.xview)
-        scroll_y.config(command=self.citizen_table.yview)
 
-        # self.citizen_table.heading('citizen_id', text='ID')
-        self.citizen_table.heading('citizen_name', text='Name')
-        self.citizen_table.heading('citizen_age', text='Age')
-        self.citizen_table.heading('citizen_dob', text='DOB')
-        self.citizen_table.heading('citizen_gender', text='Gender')
-        self.citizen_table.heading('citizen_phone', text='Phone No')
-        self.citizen_table.heading('citizen_email', text='Email')
-        self.citizen_table.heading('citizen_aadhar', text='Aadhar')
-        self.citizen_table.heading('citizen_pan', text='PAN')
-        self.citizen_table.heading('citizen_occupation', text='Occupation')
-        self.citizen_table.heading('citizen_disability', text='Disability')
-        self.citizen_table.heading('citizen_city', text='City')
-        self.citizen_table.heading('citizen_bank_accno', text='Bank Acc No')
-        self.citizen_table.heading('citizen_bank_ifsc', text='IFSC Code')
-        # self.citizen_table.heading('country', text='Country')
-        # self.citizen_table.heading('salary', text='Salary')
 
-        self.citizen_table['show'] = 'headings'
-        # self.citizen_table.column('citizen_id', width=100)
-        self.citizen_table.column('citizen_name', width=100)
-        self.citizen_table.column('citizen_age', width=100)
-        self.citizen_table.column('citizen_dob', width=100)
-        self.citizen_table.column('citizen_phone', width=100)
-        self.citizen_table.column('citizen_aadhar', width=100)
-        self.citizen_table.column('citizen_pan', width=100)
-        self.citizen_table.column('citizen_occupation', width=100)
-        self.citizen_table.column('citizen_disability', width=100)
-        self.citizen_table.column('citizen_city', width=100)
-        self.citizen_table.column('citizen_bank_accno', width=100)
-        self.citizen_table.column('citizen_bank_ifsc', width=100)
-        # self.citizen_table.column('country', width=100)
-        # self.citizen_table.column('salary', width=100)
 
-        self.citizen_table.pack(fill=BOTH, expand=1)
+        # table_frame = Frame(down_frame)
+        # table_frame.place(x=0, y=0, width=1470, height=500)
 
-        self.citizen_table.bind("<ButtonRelease>", self.get_cursor)
+        # scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
+        # scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
 
-        self.fetch_data()
+        # self.citizen_table = ttk.Treeview(table_frame, column=("citizen_name", "citizen_age",  "citizen_dob","citizen_gender", "citizen_phone", "citizen_email", "citizen_aadhar","citizen_pan",
+        #                                   "citizen_occupation", "citizen_disability", "citizen_city", "citizen_bank_accno", "citizen_bank_ifsc"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+        # scroll_x.pack(side=BOTTOM, fill=X)
+        # scroll_y.pack(side=RIGHT, fill=Y)
+        # scroll_x.config(command=self.citizen_table.xview)
+        # scroll_y.config(command=self.citizen_table.yview)
+
+        # # self.citizen_table.heading('citizen_id', text='ID')
+        # self.citizen_table.heading('citizen_name', text='Name')
+        # self.citizen_table.heading('citizen_age', text='Age')
+        # self.citizen_table.heading('citizen_dob', text='DOB')
+        # self.citizen_table.heading('citizen_gender', text='Gender')
+        # self.citizen_table.heading('citizen_phone', text='Phone No')
+        # self.citizen_table.heading('citizen_email', text='Email')
+        # self.citizen_table.heading('citizen_aadhar', text='Aadhar')
+        # self.citizen_table.heading('citizen_pan', text='PAN')
+        # self.citizen_table.heading('citizen_occupation', text='Occupation')
+        # self.citizen_table.heading('citizen_disability', text='Disability')
+        # self.citizen_table.heading('citizen_city', text='City')
+        # self.citizen_table.heading('citizen_bank_accno', text='Bank Acc No')
+        # self.citizen_table.heading('citizen_bank_ifsc', text='IFSC Code')
+        # # self.citizen_table.heading('country', text='Country')
+        # # self.citizen_table.heading('salary', text='Salary')
+
+        # self.citizen_table['show'] = 'headings'
+        # # self.citizen_table.column('citizen_id', width=100)
+        # self.citizen_table.column('citizen_name', width=100)
+        # self.citizen_table.column('citizen_age', width=100)
+        # self.citizen_table.column('citizen_dob', width=100)
+        # self.citizen_table.column('citizen_phone', width=100)
+        # self.citizen_table.column('citizen_aadhar', width=100)
+        # self.citizen_table.column('citizen_pan', width=100)
+        # self.citizen_table.column('citizen_occupation', width=100)
+        # self.citizen_table.column('citizen_disability', width=100)
+        # self.citizen_table.column('citizen_city', width=100)
+        # self.citizen_table.column('citizen_bank_accno', width=100)
+        # self.citizen_table.column('citizen_bank_ifsc', width=100)
+        # # self.citizen_table.column('country', width=100)
+        # # self.citizen_table.column('salary', width=100)
+
+        # self.citizen_table.pack(fill=BOTH, expand=1)
+
+        # self.citizen_table.bind("<ButtonRelease>", self.get_cursor)
+
+        # self.fetch_data()
+
+
+
+
+
 
     # *************Function Declarations****************
 
@@ -379,12 +575,13 @@ class Admin:
 
     # Fetch data
 
-    def fetch_data(self):
+    def fetch_data_citizen(self):
         conn = mysql.connector.connect(
             host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
         my_cursor = conn.cursor()
         my_cursor.execute('select * from citizen')
         data = my_cursor.fetchall()
+        print(data)
         if len(data) != 0:
             self.citizen_table.delete(*self.citizen_table.get_children())
             for i in data:
@@ -392,6 +589,51 @@ class Admin:
             conn.commit()
         conn.close()
 
+    def fetch_data_loan(self):
+        conn = mysql.connector.connect(
+            host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
+        my_cursor = conn.cursor()
+        my_cursor.callproc('loanJoin')
+        for i in my_cursor.stored_results():
+            data=i.fetchall()
+            if len(data) != 0:
+                self.citizen_table.delete(*self.citizen_table.get_children())
+                for j in data:
+                    self.citizen_table.insert("", END, values=j)
+            conn.commit()
+        
+        conn.close()
+
+    def fetch_data_pension(self):
+        conn = mysql.connector.connect(
+            host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
+        my_cursor = conn.cursor()
+        my_cursor.callproc('pensionJoin')
+        for i in my_cursor.stored_results():
+            data=i.fetchall()
+            if len(data) != 0:
+                self.citizen_table.delete(*self.citizen_table.get_children())
+                for j in data:
+                    self.citizen_table.insert("", END, values=j)
+            conn.commit()
+        
+        conn.close()
+
+    def fetch_data_scholarship(self):
+        conn = mysql.connector.connect(
+            host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
+        my_cursor = conn.cursor()
+        my_cursor.callproc('scholarshipJoin')
+        for i in my_cursor.stored_results():
+            data=i.fetchall()
+            if len(data) != 0:
+                self.citizen_table.delete(*self.citizen_table.get_children())
+                for j in data:
+                    self.citizen_table.insert("", END, values=j)
+            conn.commit()
+        
+        conn.close()
+    
     # Get Cursor
 
     def get_cursor(self, event=""):
