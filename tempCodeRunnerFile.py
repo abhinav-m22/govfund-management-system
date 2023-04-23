@@ -7,7 +7,7 @@ root = Tk()
 
 root.title('Login')
 
-root. geometry("1920x1080")
+root. geometry("1920x1080+0+0")
 root.configure(bg="#fff")
 root.resizable(False, False)
 
@@ -50,10 +50,10 @@ def signin():
 
 
 img = PhotoImage(file='images/signup.png')
-Label(root, image=img, bg="white").place(x=400, y=250)
+Label(root, image=img, bg="white").place(x=50, y=50)
 
 frame = Frame(root, width=350, height=350, bg="white")
-frame. place(x=810, y=250)
+frame. place(x=480, y=70)
 
 heading = Label(frame, text="Sign in", fg='#57a1f8', bg='white',
                 font=('Microsoft YaHei UI Light', 23, 'bold'))
@@ -109,10 +109,6 @@ def signinpage():
     root.destroy()
     import signup
 
-def adminSignIn():
-    root.destroy()
-    import adminSignIn
-
 # BUTTON --------------------------
 Button(frame, width=39, pady=7, text='Sign in', bg='#57a1f8',
        fg='white', border=0, command=signin) .place(x=35, y=204)
@@ -125,14 +121,5 @@ label.place(x=75, y=270)
 sign_up = Button(frame, width=6, text='Sign up', border=0,
                  bg='white', cursor='hand2', fg='#57a1f8', command=signinpage)
 sign_up.place(x=215, y=270)
-
-
-label = Label(frame, text='Are you an admin?', fg="black",
-              bg='white', font=('Microsoft YaHei UI Light', 10))
-label.place(x=75, y=295)
-
-signin = Button(frame, width=10, text='Click Here', border=0,
-                bg='white', cursor='hand2', fg='#57a1f8', command=adminSignIn)
-signin.place(x=197, y=298)
 
 root.mainloop()
