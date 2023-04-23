@@ -411,11 +411,43 @@ class Admin:
 
             self.fetch_data_citizen()
             
+        def archive():
+            table_frame = Frame(down_frame)
+            table_frame.place(x=0, y=0, width=1470, height=500)
+
+            scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
+            scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
+
+            self.citizen_table = ttk.Treeview(table_frame, column=("action", "new_aadhar",  "date","old_aadhar"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+
+            scroll_x.pack(side=BOTTOM, fill=X)
+            scroll_y.pack(side=RIGHT, fill=Y)
+            scroll_x.config(command=self.citizen_table.xview)
+            scroll_y.config(command=self.citizen_table.yview)
+
+            self.citizen_table.heading('action', text='Action')
+            self.citizen_table.heading('new_aadhar', text='New Aadhar')
+            self.citizen_table.heading('date', text='Date')
+            self.citizen_table.heading('old_aadhar', text='Old Aadhar')
+
+            self.citizen_table['show'] = 'headings'
+
+            self.citizen_table.column('action', width=100)
+            self.citizen_table.column('new_aadhar', width=100)
+            self.citizen_table.column('date', width=100)
+            self.citizen_table.column('old_aadhar', width=100)
+
+            self.citizen_table.pack(fill=BOTH, expand=1)
+
+            self.citizen_table.bind("<ButtonRelease>", self.get_cursor)
+
+            self.fetch_data_archive()
+
 
         img_logo = Image.open("images/history.png")
         img_logo = img_logo.resize((50, 50), Image.ANTIALIAS)
         self.photo_logo = ImageTk.PhotoImage(img_logo)
-        self.my_button = Button(root, image=self.photo_logo, command=showCitizens, bd=0)
+        self.my_button = Button(root, image=self.photo_logo, command=archive, bd=0)
         self.my_button.place(x=1400, y=50, width=50, height=50)
 
         Button(root, width=25, pady=7, text='Loan', bg='#57a1f8',
@@ -580,6 +612,20 @@ class Admin:
             host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
         my_cursor = conn.cursor()
         my_cursor.execute('select * from citizen')
+        data = my_cursor.fetchall()
+        print(data)
+        if len(data) != 0:
+            self.citizen_table.delete(*self.citizen_table.get_children())
+            for i in data:
+                self.citizen_table.insert("", END, values=i)
+            conn.commit()
+        conn.close()
+
+    def fetch_data_archive(self):
+        conn = mysql.connector.connect(
+            host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
+        my_cursor = conn.cursor()
+        my_cursor.execute('select * from verification')
         data = my_cursor.fetchall()
         print(data)
         if len(data) != 0:

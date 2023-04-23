@@ -144,8 +144,6 @@ class Scholarship:
                 self.var_occupation.get(),
                 self.var_caste.get()
 
-
-
             ))
             conn.commit()
             conn.close()

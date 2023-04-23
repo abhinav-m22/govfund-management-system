@@ -47,7 +47,13 @@ def signin():
 
 #  ----------------------------------------------
 # Page Switch -------------------------
-
+# 463876539826
+# FG34JK456G
+# 28/01/1967
+# 123435456678
+# ICICI0000765
+# Omkar Jadeja
+# 9834747334
 
 img = PhotoImage(file='images/signup.png')
 Label(root, image=img, bg="white").place(x=400, y=250)

@@ -3,7 +3,7 @@ from tkinter import messagebox
 import mysql.connector
 from pension import Pension
 from scholarship import Scholarship
-
+from loan import Loan
 root = Tk()
 
 root.title('Login')
@@ -40,8 +40,7 @@ def scholarship():
     Scholarship(root)
 
 def loan():
-    # root.destroy()
-    import loan
+    Loan(root)
 
 
 Button(frame, width=32, pady=7, text='Loan', bg='#57a1f8',
