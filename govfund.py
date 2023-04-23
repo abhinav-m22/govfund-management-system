@@ -6,7 +6,7 @@ import mysql.connector
 from tkinter import messagebox
 
 
-MySQLPassword = '2424'
+MySQLPassword = ''
 DatabaseName = 'govfund'
 Username = 'root'
 
