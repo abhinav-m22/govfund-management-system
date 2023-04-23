@@ -40,7 +40,7 @@ def scholarship():
     Scholarship(root)
 
 def loan():
-    root.destroy()
+    # root.destroy()
     import loan
 
 

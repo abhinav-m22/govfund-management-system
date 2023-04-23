@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import mysql.connector
-from govfund import Citizen
+from adminPage import Admin
 
 root = Tk()
 
@@ -40,7 +40,7 @@ def signin():
         # root.destroy()
         # import govfund
 
-        Citizen(root)
+        Admin(root)
     else:
         messagebox.showerror("Error", "Invalid username or password")
 
@@ -105,16 +105,11 @@ Frame(frame, width=295, height=2, bg='black').place(x=25, y=177)
 # signinpage ---------------------
 
 
-def signinpage():
-    root.destroy()
-    import signup
-
-def adminSignIn():
-    root.destroy()
-    import adminSignIn
+def signInAdmin():
+    Admin(root)
 
 # BUTTON --------------------------
 Button(frame, width=39, pady=7, text='Sign in', bg='#57a1f8',
-       fg='white', border=0, command=signin) .place(x=35, y=204)
+       fg='white', border=0, command=signInAdmin) .place(x=35, y=204)
 
 root.mainloop()

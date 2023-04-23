@@ -5,16 +5,15 @@ from PIL import Image, ImageTk
 import mysql.connector
 from tkinter import messagebox
 
-
-MySQLPassword = ''
-DatabaseName = 'govfund'
+MySQLPassword = 'manas'
+DatabaseName = 'cp'
 Username = 'root'
 
 
-class Pension:
+class Citizen:
     def __init__(self, root):
         self.root = root
-        self.root.geometry("1530x790+0+0")
+        self.root.geometry("1920x1080+0+0")
         self.root.title("Fund Management System")
 
         # Variables
