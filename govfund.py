@@ -191,26 +191,39 @@ class Citizen:
         txt_ifsc.grid(row=3, column=5, padx=2, pady=7)
 
         # Button Frame
-        button_frame = Frame(upper_frame, bd=2, relief=RIDGE, bg='white')
-        button_frame.place(x=1040, y=0, width=180, height=210)
+        # button_frame = Frame(upper_frame, bd=2, relief=RIDGE, bg='white')
+        # button_frame.place(x=1040, y=0, width=180, height=210)
 
-        btn_add = Button(button_frame, text="Save", command=self.add_data, font=(
-            'arial', 15, 'bold'), width=13, bg='blue', fg='white')
-        btn_add.grid(row=0, column=0, padx=1, pady=5)
+        # btn_add = Button(button_frame, text="Save", command=self.add_data, font=(
+        #     'arial', 15, 'bold'), width=13, bg='blue', fg='white')
+        # btn_add.grid(row=0, column=0, padx=1, pady=5)
 
-        btn_update = Button(button_frame, text="Update", command=self.update_data, font=(
-            'arial', 15, 'bold'), width=13, bg='blue', fg='white')
-        btn_update.grid(row=1, column=0, padx=1, pady=5)
+        # btn_update = Button(button_frame, text="Update", command=self.update_data, font=(
+        #     'arial', 15, 'bold'), width=13, bg='blue', fg='white')
+        # btn_update.grid(row=1, column=0, padx=1, pady=5)
 
-        btn_delete = Button(button_frame, text="Delete", command=self.delete_data, font=(
-            'arial', 15, 'bold'), width=13, bg='blue', fg='white')
-        btn_delete.grid(row=2, column=0, padx=1, pady=5)
+        # btn_delete = Button(button_frame, text="Delete", command=self.delete_data, font=(
+        #     'arial', 15, 'bold'), width=13, bg='blue', fg='white')
+        # btn_delete.grid(row=2, column=0, padx=1, pady=5)
 
-        btn_clear = Button(button_frame, text="Clear", command=self.reset_data, font=(
-            'arial', 15, 'bold'), width=13, bg='blue', fg='white')
-        btn_clear.grid(row=3, column=0, padx=1, pady=5)
+        # btn_clear = Button(button_frame, text="Clear", command=self.reset_data, font=(
+        #     'arial', 15, 'bold'), width=13, bg='blue', fg='white')
+        # btn_clear.grid(row=3, column=0, padx=1, pady=5)
+        
 
-#         # Down Frame
+        def schemeChoose():
+            root.destroy()
+            import choosingScheme
+
+
+        Button(root, width=25, pady=7, text='Save Details', bg='#57a1f8',
+             fg='white', border=0,font=('Microsoft YaHei UI Light', 16, 'bold'),command=self.add_data) .place(x=600, y=500)
+
+        Button(root, width=32, pady=7, text='Apply for Schemes', bg='#57a1f8',
+             fg='white', border=0,font=('Microsoft YaHei UI Light', 16, 'bold'),command=schemeChoose) .place(x=550, y=650)
+
+
+         # Down Frame
 #         down_frame = LabelFrame(Main_frame, bd=2, relief=RIDGE, bg='white',
 #                                 text='Citizen Information Table', font=('times new roman', 11, 'bold'), fg='red')
 #         down_frame.place(x=10, y=240, width=1235, height=230)
