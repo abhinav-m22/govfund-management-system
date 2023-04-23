@@ -16,8 +16,8 @@ root.resizable(False, False)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="",
-    database="govfund"
+    password="manas",
+    database="cp"
 )
 
 

@@ -10,7 +10,7 @@ DatabaseName = 'cp'
 Username = 'root'
 
 
-class Citizen:
+class Pension:
     def __init__(self, root):
         self.root = root
         self.root.geometry("1920x1080+0+0")
