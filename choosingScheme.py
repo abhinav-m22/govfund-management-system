@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
 import mysql.connector
+from pension import Pension
+from scholarship import Scholarship
 
 root = Tk()
 
@@ -14,8 +16,8 @@ root.resizable(False, False)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="manas",
-    database="cp"
+    password="",
+    database="govfund"
 )
 
 
@@ -32,12 +34,10 @@ heading = Label(frame, text="Choose a Scheme", fg='#57a1f8', bg='white',
 heading. place(x=95, y=5)
 
 def pension():
-    root.destroy()
-    import pension
+    Pension(root)
 
 def scholarship():
-    root.destroy()
-    import scholarship
+    Scholarship(root)
 
 def loan():
     root.destroy()

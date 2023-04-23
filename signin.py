@@ -15,8 +15,8 @@ root.resizable(False, False)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="manas",
-    database="cp"
+    password="",
+    database="govfund"
 )
 
 # Create a cursor object
