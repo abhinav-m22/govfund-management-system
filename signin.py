@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import mysql.connector
+from govfund import Citizen
 
 root = Tk()
 
@@ -14,8 +15,8 @@ root.resizable(False, False)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="2424",
-    database="govfund"
+    password="",
+    database=""
 )
 
 # Create a cursor object
@@ -35,11 +36,14 @@ def signin():
     temp = mycursor.fetchone()
 
     if temp:
-        messagebox.showinfo("Success", "Login successful")
+        # messagebox.showinfo("Success", "Login successful")
         # root.destroy()
         # import govfund
+
+        Citizen(root)
     else:
         messagebox.showerror("Error", "Invalid username or password")
+
 
 #  ----------------------------------------------
 # Page Switch -------------------------
@@ -105,10 +109,10 @@ def signinpage():
     root.destroy()
     import signup
 
-
 # BUTTON --------------------------
 Button(frame, width=39, pady=7, text='Sign in', bg='#57a1f8',
        fg='white', border=0, command=signin) .place(x=35, y=204)
+
 label = Label(frame, text="Don't have an account?", fg='black',
               bg='white', font=('Microsoft YaHei UI Light', 9))
 label.place(x=75, y=270)

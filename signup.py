@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import ast
 import mysql.connector
+from govfund import Citizen
 
 window = Tk()
 
@@ -15,8 +16,8 @@ window.resizable(False, False)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="2424",
-    database="govfund"
+    password="",
+    database=""
 )
 
 # Create a cursor object
@@ -44,6 +45,7 @@ def signup():
                 "INSERT INTO users (username, password) VALUES (%s, %s)", (username, password))
             mydb.commit()
             messagebox.showinfo("Success", "User created successfully")
+            Citizen(window)
         else:
             messagebox.showerror(
                 "Error", "Password and Confirm Password doesn't match")

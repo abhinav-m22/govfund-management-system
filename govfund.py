@@ -8,7 +8,7 @@ from tkinter import messagebox
 
 MySQLPassword = ''
 DatabaseName = ''
-Username = ''
+Username = 'root'
 
 
 class Citizen:
@@ -333,15 +333,15 @@ class Citizen:
 
 
 
-            ))
-            conn.commit()
-            self.fetch_data()
-            conn.close()
-            messagebox.showinfo(
+                ))
+                conn.commit()
+                self.fetch_data()
+                conn.close()
+                messagebox.showinfo(
                 'Success', 'citizen has been addded!', parent=self.root)
 
             except Exception as es:
-            messagebox.showerror(
+                messagebox.showerror(
                 'Error', f'Due to:{str(es)}', parent=self.root)
 
     # Fetch data
@@ -421,9 +421,9 @@ class Citizen:
                 messagebox.showinfo(
                     'Success', 'Citizen Successfully Updated!', parent=self.root)
 
-        except Exception as es:
-            messagebox.showerror(
-                'Error', f'Due to:{str(es)}', parent=self.root)
+            except Exception as es:
+                messagebox.showerror(
+                    'Error', f'Due to:{str(es)}', parent=self.root)
 
     # Delete
 
@@ -447,9 +447,9 @@ class Citizen:
                 conn.close()
                 messagebox.showinfo('Delete','citizen Successfully Deleted!', parent=self.root)
 
-        except Exception as es:
-            messagebox.showerror(
-                'Error', f'Due to:{str(es)}', parent=self.root)
+            except Exception as es:
+                messagebox.showerror(
+                    'Error', f'Due to:{str(es)}', parent=self.root)
 
     # Clear
 
@@ -490,7 +490,8 @@ class Citizen:
                     'Error', f'Due to:{str(es)}', parent=self.root)
 
 
-if __name__ == "__main__":
-    root = Tk()
-    obj = Citizen(root)
-    root.mainloop()
+def start():
+    if __name__ == "__main__":
+        root = Tk()
+        obj = Citizen(root)
+        root.mainloop()
