@@ -6,8 +6,8 @@ import mysql.connector
 from tkinter import messagebox
 
 
-MySQLPassword = 'manas'
-DatabaseName = 'cp'
+MySQLPassword = '2424'
+DatabaseName = 'govfund'
 Username = 'root'
 
 
@@ -101,10 +101,12 @@ class Citizen:
         txt_occupation.grid(row=1, column=1, padx=2, pady=7)
 
         # Email
-        lbl_email=Label(upper_frame, font=('arial',12,'bold'),text='Email:',bg='white')
+        lbl_email = Label(upper_frame, font=(
+            'arial', 12, 'bold'), text='Email:', bg='white')
         lbl_email.grid(row=1, column=2, sticky=W, padx=2, pady=7)
 
-        txt_email=ttk.Entry(upper_frame,textvariable=self.var_email, width=22, font=('arial', 11, 'bold'))
+        txt_email = ttk.Entry(
+            upper_frame, textvariable=self.var_email, width=22, font=('arial', 11, 'bold'))
         txt_email.grid(row=1, column=3, padx=2, pady=7)
 
         # PAN
@@ -146,13 +148,15 @@ class Citizen:
         txt_age.grid(row=3, column=3, padx=2, pady=7)
 
         # Gender
-        lbl_gender=Label(upper_frame, font=('arial',12,'bold'),text='Gender:',bg='white')
+        lbl_gender = Label(upper_frame, font=(
+            'arial', 12, 'bold'), text='Gender:', bg='white')
         lbl_gender.grid(row=4, column=0, sticky=W, padx=2, pady=7)
 
-        com_txt_gender=ttk.Combobox(upper_frame,textvariable=self.var_gender, state='readonly', font=('arial',12,'bold'),width=18)
-        com_txt_gender['value']=("Male", "Female", "Other")
+        com_txt_gender = ttk.Combobox(
+            upper_frame, textvariable=self.var_gender, state='readonly', font=('arial', 12, 'bold'), width=18)
+        com_txt_gender['value'] = ("Male", "Female", "Other")
         com_txt_gender.current(0)
-        com_txt_gender.grid(row=4,column=1,sticky=W, padx=2, pady=7)
+        com_txt_gender.grid(row=4, column=1, sticky=W, padx=2, pady=7)
 
         # Phone Number
         lbl_phone = Label(upper_frame, font=(
@@ -209,21 +213,18 @@ class Citizen:
         # btn_clear = Button(button_frame, text="Clear", command=self.reset_data, font=(
         #     'arial', 15, 'bold'), width=13, bg='blue', fg='white')
         # btn_clear.grid(row=3, column=0, padx=1, pady=5)
-        
 
         def schemeChoose():
             root.destroy()
             import choosingScheme
 
-
         Button(root, width=25, pady=7, text='Save Details', bg='#57a1f8',
-             fg='white', border=0,font=('Microsoft YaHei UI Light', 16, 'bold'),command=self.add_data) .place(x=600, y=500)
+               fg='white', border=0, font=('Microsoft YaHei UI Light', 16, 'bold'), command=self.add_data) .place(x=600, y=500)
 
         Button(root, width=32, pady=7, text='Apply for Schemes', bg='#57a1f8',
-             fg='white', border=0,font=('Microsoft YaHei UI Light', 16, 'bold'),command=schemeChoose) .place(x=550, y=650)
+               fg='white', border=0, font=('Microsoft YaHei UI Light', 16, 'bold'), command=schemeChoose) .place(x=550, y=650)
 
-
-         # Down Frame
+        # Down Frame
 #         down_frame = LabelFrame(Main_frame, bd=2, relief=RIDGE, bg='white',
 #                                 text='Citizen Information Table', font=('times new roman', 11, 'bold'), fg='red')
 #         down_frame.place(x=10, y=240, width=1235, height=230)
@@ -321,12 +322,12 @@ class Citizen:
         # if self.var_id.get()=="" or self.var_bankacc.get()=="":
         #     messagebox.showerror('Error','All Fields are required')
         # else:
-            try:
-                conn = mysql.connector.connect(
-                    host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
-                my_cursor = conn.cursor()
-                age=int(self.var_age.get())
-                my_cursor.execute('insert into citizen values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', (
+        try:
+            conn = mysql.connector.connect(
+                host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
+            my_cursor = conn.cursor()
+            age = int(self.var_age.get())
+            my_cursor.execute('insert into citizen values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', (
 
                 # Variables
                 self.var_name.get(),
@@ -345,15 +346,15 @@ class Citizen:
 
 
 
-                ))
-                conn.commit()
-                self.fetch_data()
-                conn.close()
-                messagebox.showinfo(
+            ))
+            conn.commit()
+            self.fetch_data()
+            conn.close()
+            messagebox.showinfo(
                 'Success', 'citizen has been addded!', parent=self.root)
 
-            except Exception as es:
-                messagebox.showerror(
+        except Exception as es:
+            messagebox.showerror(
                 'Error', f'Due to:{str(es)}', parent=self.root)
 
     # Fetch data
@@ -392,50 +393,49 @@ class Citizen:
         self.var_bankacc.set(data[11])
         self.var_bankifsc.set(data[12])
 
-
     def update_data(self):
         # if self.var_id.get()=="" or self.var_bankacc.get()=="":
         #     messagebox.showerror('Error','All Fields are required')
         # else:
-            try:
+        try:
 
-                update = messagebox.askyesno(
-                    'Update', 'Are you sure to update this citizen data?')
-                if update > 0:
-                    conn = mysql.connector.connect(
-                        host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
-                    my_cursor = conn.cursor()
-                    my_cursor.execute('update citizen set citizen_name=%s,citizen_age=%s,citizen_dob=%s,citizen_phone=%s,citizen_aadhar=%s,citizen_pan=%s,citizen_occupation=%s,citizen_disability=%s,citizen_city=%s,citizen_bank_accno=%s,citizen_bank_ifsc=%s where citizen_aadhar=%s', (
+            update = messagebox.askyesno(
+                'Update', 'Are you sure to update this citizen data?')
+            if update > 0:
+                conn = mysql.connector.connect(
+                    host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
+                my_cursor = conn.cursor()
+                my_cursor.execute('update citizen set citizen_name=%s,citizen_age=%s,citizen_dob=%s,citizen_phone=%s,citizen_aadhar=%s,citizen_pan=%s,citizen_occupation=%s,citizen_disability=%s,citizen_city=%s,citizen_bank_accno=%s,citizen_bank_ifsc=%s where citizen_aadhar=%s', (
 
-                                                                                                                                                                                                                                13,
-                                                                                                                self.var_name.get(),
-                                                                                                                12,
-                                                                                                                self.var_dob.get(),
-                                                                                                                self.var_phone.get(),
-                                                                                                                self.var_aadhar.get(),
-                                                                                                                self.var_pan.get(),
-                                                                                                                self.var_occupation.get(),
-                                                                                                                self.var_disability.get(),
-                                                                                                                self.var_city.get(),
-                                                                                                                self.var_bankacc.get(),
-                                                                                                                self.var_bankifsc.get(),
+                    13,
+                    self.var_name.get(),
+                    12,
+                    self.var_dob.get(),
+                    self.var_phone.get(),
+                    self.var_aadhar.get(),
+                    self.var_pan.get(),
+                    self.var_occupation.get(),
+                    self.var_disability.get(),
+                    self.var_city.get(),
+                    self.var_bankacc.get(),
+                    self.var_bankifsc.get(),
 
 
 
-                                                                                                                                                                                                                                ))
+                ))
 
-                else:
-                    if not update:
-                        return
-                conn.commit()
-                self.fetch_data()
-                conn.close()
-                messagebox.showinfo(
-                    'Success', 'Citizen Successfully Updated!', parent=self.root)
+            else:
+                if not update:
+                    return
+            conn.commit()
+            self.fetch_data()
+            conn.close()
+            messagebox.showinfo(
+                'Success', 'Citizen Successfully Updated!', parent=self.root)
 
-            except Exception as es:
-                messagebox.showerror(
-                    'Error', f'Due to:{str(es)}', parent=self.root)
+        except Exception as es:
+            messagebox.showerror(
+                'Error', f'Due to:{str(es)}', parent=self.root)
 
     # Delete
 
@@ -443,25 +443,28 @@ class Citizen:
         # if self.var_pan.get()=="":
         #     messagebox.showerror('Error','All fields are required')
         # else:
-            try:
-                Delete=messagebox.askyesno('Delete','Are you sure to delete this citizen data?',parent=self.root)
-                if Delete>0:
-                    conn=mysql.connector.connect(host='localhost',user=Username, password=MySQLPassword, database=DatabaseName)
-                    my_cursor=conn.cursor()
-                    sql='delete from citizen where citizen_aadhar=%s'
-                    value=(self.var_pan.get(),)
-                    my_cursor.execute(sql, value)
-                else:
-                    if not Delete:
-                        return
-                conn.commit()
-                self.fetch_data()
-                conn.close()
-                messagebox.showinfo('Delete','citizen Successfully Deleted!', parent=self.root)
+        try:
+            Delete = messagebox.askyesno(
+                'Delete', 'Are you sure to delete this citizen data?', parent=self.root)
+            if Delete > 0:
+                conn = mysql.connector.connect(
+                    host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
+                my_cursor = conn.cursor()
+                sql = 'delete from citizen where citizen_aadhar=%s'
+                value = (self.var_pan.get(),)
+                my_cursor.execute(sql, value)
+            else:
+                if not Delete:
+                    return
+            conn.commit()
+            self.fetch_data()
+            conn.close()
+            messagebox.showinfo(
+                'Delete', 'citizen Successfully Deleted!', parent=self.root)
 
-            except Exception as es:
-                messagebox.showerror(
-                    'Error', f'Due to:{str(es)}', parent=self.root)
+        except Exception as es:
+            messagebox.showerror(
+                'Error', f'Due to:{str(es)}', parent=self.root)
 
     # Clear
 
@@ -487,12 +490,15 @@ class Citizen:
             messagebox.showerror('Error', 'Please Select Option')
         else:
             try:
-                conn=mysql.connector.connect(host='localhost',user=Username, password=MySQLPassword, database=DatabaseName)
-                my_cursor=conn.cursor()
-                my_cursor.execute('select * from citizen where ' +str(self.var_com_search.get()) +" LIKE '%" +str(self.var_search.get() +"%'"))
-                rows=my_cursor.fetchall()
-                if len(rows)!=0:
-                    self.citizen_table.delete(*self.citizen_table.get_children())
+                conn = mysql.connector.connect(
+                    host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
+                my_cursor = conn.cursor()
+                my_cursor.execute('select * from citizen where ' + str(
+                    self.var_com_search.get()) + " LIKE '%" + str(self.var_search.get() + "%'"))
+                rows = my_cursor.fetchall()
+                if len(rows) != 0:
+                    self.citizen_table.delete(
+                        *self.citizen_table.get_children())
                     for i in rows:
                         self.citizen_table.insert("", END, values=i)
                 conn.commit()
