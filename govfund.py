@@ -6,38 +6,34 @@ import mysql.connector
 from tkinter import messagebox
 
 
-MySQLPassword = ''
-DatabaseName = ''
+MySQLPassword = 'manas'
+DatabaseName = 'cp'
 Username = 'root'
 
 
 class Citizen:
     def __init__(self, root):
         self.root = root
-        self.root.geometry("1530x790+0+0")
+        self.root.geometry("1920x1080+0+0")
         self.root.title("Fund Management System")
 
         # Variables
-        self.var_id = int()
         self.var_name = StringVar()
-        self.var_age = int()
-        self.var_bankacc = StringVar()
-        self.var_bankifsc = StringVar()
-        self.var_occupation = StringVar()
+        self.var_age = StringVar()
         self.var_dob = StringVar()
-        self.var_disability = StringVar()
+        self.var_gender = StringVar()
+        self.var_phone = StringVar()
+        self.var_email = StringVar()
         self.var_aadhar = StringVar()
         self.var_pan = StringVar()
+        self.var_occupation = StringVar()
+        self.var_disability = StringVar()
         self.var_city = StringVar()
-        self.var_phone = StringVar()
-        # self.var_country=StringVar()
-        # self.var_salary=StringVar()
-        self.var_address = StringVar()
-        self.var_email = StringVar()
-        self.var_gender = StringVar()
+        self.var_bankacc = StringVar()
+        self.var_bankifsc = StringVar()
 
-        lbl_tile = Label(self.root, text="FUND MANAGEMENT SYSTEM", font=(
-            'times new roman', 37, 'bold'), fg='darkblue', bg='white')
+        lbl_tile = Label(self.root, text="Fund Management System", font=(
+            'Microsoft YaHei UI Light', 37, 'bold'), fg='darkblue', bg='white')
         lbl_tile.place(x=0, y=0, width=1530, height=50)
 
         # Logo
@@ -104,12 +100,12 @@ class Citizen:
             upper_frame, textvariable=self.var_occupation, width=22, font=('arial', 11, 'bold'))
         txt_occupation.grid(row=1, column=1, padx=2, pady=7)
 
-        # # Email
-        # lbl_email=Label(upper_frame, font=('arial',12,'bold'),text='Email:',bg='white')
-        # lbl_email.grid(row=1, column=2, sticky=W, padx=2, pady=7)
+        # Email
+        lbl_email=Label(upper_frame, font=('arial',12,'bold'),text='Email:',bg='white')
+        lbl_email.grid(row=1, column=2, sticky=W, padx=2, pady=7)
 
-        # txt_email=ttk.Entry(upper_frame,textvariable=self.var_email, width=22, font=('arial', 11, 'bold'))
-        # txt_email.grid(row=1, column=3, padx=2, pady=7)
+        txt_email=ttk.Entry(upper_frame,textvariable=self.var_email, width=22, font=('arial', 11, 'bold'))
+        txt_email.grid(row=1, column=3, padx=2, pady=7)
 
         # PAN
         lbl_pan = Label(upper_frame, font=('arial', 12, 'bold'),
@@ -149,14 +145,14 @@ class Citizen:
                             width=22, font=('arial', 11, 'bold'))
         txt_age.grid(row=3, column=3, padx=2, pady=7)
 
-        # # Gender
-        # lbl_gender=Label(upper_frame, font=('arial',12,'bold'),text='Gender:',bg='white')
-        # lbl_gender.grid(row=4, column=0, sticky=W, padx=2, pady=7)
+        # Gender
+        lbl_gender=Label(upper_frame, font=('arial',12,'bold'),text='Gender:',bg='white')
+        lbl_gender.grid(row=4, column=0, sticky=W, padx=2, pady=7)
 
-        # com_txt_gender=ttk.Combobox(upper_frame,textvariable=self.var_gender, state='readonly', font=('arial',12,'bold'),width=18)
-        # com_txt_gender['value']=("Male", "Female", "Other")
-        # com_txt_gender.current(0)
-        # com_txt_gender.grid(row=4,column=1,sticky=W, padx=2, pady=7)
+        com_txt_gender=ttk.Combobox(upper_frame,textvariable=self.var_gender, state='readonly', font=('arial',12,'bold'),width=18)
+        com_txt_gender['value']=("Male", "Female", "Other")
+        com_txt_gender.current(0)
+        com_txt_gender.grid(row=4,column=1,sticky=W, padx=2, pady=7)
 
         # Phone Number
         lbl_phone = Label(upper_frame, font=(
@@ -260,18 +256,20 @@ class Citizen:
         scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
         scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
 
-        self.citizen_table = ttk.Treeview(table_frame, column=("citizen_id", "citizen_name", "citizen_age", "citizen_dob", "citizen_phone", "citizen_aadhar", "citizen_pan",
+        self.citizen_table = ttk.Treeview(table_frame, column=("citizen_name", "citizen_age",  "citizen_dob","citizen_gender", "citizen_phone", "citizen_email", "citizen_aadhar","citizen_pan",
                                           "citizen_occupation", "citizen_disability", "citizen_city", "citizen_bank_accno", "citizen_bank_ifsc"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
         scroll_x.pack(side=BOTTOM, fill=X)
         scroll_y.pack(side=RIGHT, fill=Y)
         scroll_x.config(command=self.citizen_table.xview)
         scroll_y.config(command=self.citizen_table.yview)
 
-        self.citizen_table.heading('citizen_id', text='ID')
+        # self.citizen_table.heading('citizen_id', text='ID')
         self.citizen_table.heading('citizen_name', text='Name')
         self.citizen_table.heading('citizen_age', text='Age')
         self.citizen_table.heading('citizen_dob', text='DOB')
+        self.citizen_table.heading('citizen_gender', text='Gender')
         self.citizen_table.heading('citizen_phone', text='Phone No')
+        self.citizen_table.heading('citizen_email', text='Email')
         self.citizen_table.heading('citizen_aadhar', text='Aadhar')
         self.citizen_table.heading('citizen_pan', text='PAN')
         self.citizen_table.heading('citizen_occupation', text='Occupation')
@@ -283,7 +281,7 @@ class Citizen:
         # self.citizen_table.heading('salary', text='Salary')
 
         self.citizen_table['show'] = 'headings'
-        self.citizen_table.column('citizen_id', width=100)
+        # self.citizen_table.column('citizen_id', width=100)
         self.citizen_table.column('citizen_name', width=100)
         self.citizen_table.column('citizen_age', width=100)
         self.citizen_table.column('citizen_dob', width=100)
@@ -314,15 +312,16 @@ class Citizen:
                 conn = mysql.connector.connect(
                     host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
                 my_cursor = conn.cursor()
-                self.var_id = 13
-                my_cursor.execute('insert into citizen values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', (
+                age=int(self.var_age.get())
+                my_cursor.execute('insert into citizen values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', (
 
                 # Variables
-                13,
                 self.var_name.get(),
-                12,
+                age,
                 self.var_dob.get(),
+                self.var_gender.get(),
                 self.var_phone.get(),
+                self.var_email.get(),
                 self.var_aadhar.get(),
                 self.var_pan.get(),
                 self.var_occupation.get(),
@@ -366,20 +365,20 @@ class Citizen:
         content = self.citizen_table.item(cursor_row)
         data = content['values']
 
-        # self.var_id.get(),
-        self.var_name.set(data[1])
-        self.var_aadhar.set(data[5])
-        self.var_bankacc.set(data[10])
-        self.var_city.set(data[9])
-        self.var_occupation.set(data[7])
-        self.var_dob.set(data[3])
-        self.var_bankifsc.set(data[11])
-        # self.var_email.set()
-        # self.var_gender.set()
-        self.var_pan.set(data[6])
+        self.var_name.set(data[0])
+        self.var_age.set(data[1])
+        self.var_dob.set(data[2])
+        self.var_gender.set(data[3])
         self.var_phone.set(data[4])
-        self.var_disability.set(data[8])
-        self.var_age.set(data[2])
+        self.var_email.set(data[5])
+        self.var_aadhar.set(data[6])
+        self.var_pan.set(data[7])
+        self.var_occupation.set(data[8])
+        self.var_disability.set(data[9])
+        self.var_city.set(data[10])
+        self.var_bankacc.set(data[11])
+        self.var_bankifsc.set(data[12])
+
 
     def update_data(self):
         # if self.var_id.get()=="" or self.var_bankacc.get()=="":

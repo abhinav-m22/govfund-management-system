@@ -5,7 +5,7 @@ from govfund import Citizen
 
 root = Tk()
 
-root.title('Login')
+root.title('Admin Login')
 
 root. geometry("1920x1080")
 root.configure(bg="#fff")
@@ -32,7 +32,7 @@ def signin():
 
     # Check if username and password match database record
     mycursor.execute(
-        "SELECT * FROM users WHERE username=%s AND password=%s", (username, password))
+        "SELECT * FROM admin_users WHERE username=%s AND password=%s", (username, password))
     temp = mycursor.fetchone()
 
     if temp:
@@ -55,9 +55,9 @@ Label(root, image=img, bg="white").place(x=400, y=250)
 frame = Frame(root, width=350, height=350, bg="white")
 frame. place(x=810, y=250)
 
-heading = Label(frame, text="Sign in", fg='#57a1f8', bg='white',
+heading = Label(frame, text="Admin Sign In", fg='#57a1f8', bg='white',
                 font=('Microsoft YaHei UI Light', 23, 'bold'))
-heading. place(x=100, y=5)
+heading. place(x=50, y=5)
 
 
 # USERNAME ---------------------------------------
@@ -116,23 +116,5 @@ def adminSignIn():
 # BUTTON --------------------------
 Button(frame, width=39, pady=7, text='Sign in', bg='#57a1f8',
        fg='white', border=0, command=signin) .place(x=35, y=204)
-
-label = Label(frame, text="Don't have an account?", fg='black',
-              bg='white', font=('Microsoft YaHei UI Light', 9))
-label.place(x=75, y=270)
-
-
-sign_up = Button(frame, width=6, text='Sign up', border=0,
-                 bg='white', cursor='hand2', fg='#57a1f8', command=signinpage)
-sign_up.place(x=215, y=270)
-
-
-label = Label(frame, text='Are you an admin?', fg="black",
-              bg='white', font=('Microsoft YaHei UI Light', 10))
-label.place(x=75, y=295)
-
-signin = Button(frame, width=10, text='Click Here', border=0,
-                bg='white', cursor='hand2', fg='#57a1f8', command=adminSignIn)
-signin.place(x=197, y=298)
 
 root.mainloop()

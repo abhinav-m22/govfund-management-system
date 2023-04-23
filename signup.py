@@ -8,7 +8,7 @@ window = Tk()
 
 window.title("SignUp")
 
-window.geometry("925x500+300+200")
+window.geometry("1920x1080")
 window.configure(bg="#fff")
 window.resizable(False, False)
 
@@ -16,8 +16,8 @@ window.resizable(False, False)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="",
-    database=""
+    password="manas",
+    database="cp"
 )
 
 # Create a cursor object
@@ -52,10 +52,10 @@ def signup():
 
 
 img = PhotoImage(file='images/login.png')
-Label(window, image=img, border=0, bg='white').place(x=50, y=90)
+Label(window, image=img, border=0, bg='white').place(x=400, y=250)
 
 frame = Frame(window, width=350, height=390, bg='#fff')
-frame.place(x=480, y=50)
+frame.place(x=800, y=200)
 
 heading = Label(frame, text='Sign up', fg="#57a1f8", bg='white',
                 font=('Microsoft Yahei UI Light', 23, 'bold'))
@@ -137,6 +137,7 @@ def signinpage():
     import signin
 
 
+
 # button  ---------------------------------------
 print(user.get())
 Button(frame, width=39, pady=7, text='Sign up', bg='#57a1f8',
@@ -147,7 +148,10 @@ label.place(x=90, y=340)
 
 signin = Button(frame, width=6, text='Sign in', border=0,
                 bg='white', cursor='hand2', fg='#57a1f8', command=signinpage)
-signin.place(x=200, y=340)
+signin.place(x=200, y=343)
+
+
+
 
 
 window.mainloop()
