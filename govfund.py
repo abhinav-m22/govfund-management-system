@@ -210,97 +210,97 @@ class Citizen:
             'arial', 15, 'bold'), width=13, bg='blue', fg='white')
         btn_clear.grid(row=3, column=0, padx=1, pady=5)
 
-        # Down Frame
-        down_frame = LabelFrame(Main_frame, bd=2, relief=RIDGE, bg='white',
-                                text='Citizen Information Table', font=('times new roman', 11, 'bold'), fg='red')
-        down_frame.place(x=10, y=240, width=1235, height=230)
+#         # Down Frame
+#         down_frame = LabelFrame(Main_frame, bd=2, relief=RIDGE, bg='white',
+#                                 text='Citizen Information Table', font=('times new roman', 11, 'bold'), fg='red')
+#         down_frame.place(x=10, y=240, width=1235, height=230)
 
-        # Search Frame
-        search_frame = LabelFrame(down_frame, bd=2, relief=RIDGE, bg='white',
-                                  text='Search Citizen Information', font=('times new roman', 11, 'bold'), fg='red')
-        search_frame.place(x=0, y=0, width=1235, height=60)
+#         # Search Frame
+#         search_frame = LabelFrame(down_frame, bd=2, relief=RIDGE, bg='white',
+#                                   text='Search Citizen Information', font=('times new roman', 11, 'bold'), fg='red')
+#         search_frame.place(x=0, y=0, width=1235, height=60)
 
-        search_by = Label(search_frame, font=("arial", 11, "bold"),
-                          text="Search By:", fg="white", bg="red")
-        search_by.grid(row=0, column=0, sticky=W, padx=5)
+#         search_by = Label(search_frame, font=("arial", 11, "bold"),
+#                           text="Search By:", fg="white", bg="red")
+#         search_by.grid(row=0, column=0, sticky=W, padx=5)
 
-        # search
-        self.var_com_search = StringVar()
-        com_txt_search = ttk.Combobox(search_frame, textvariable=self.var_com_search,
-                                      state="readonly", font=("arial", 12, "bold"), width=18)
+#         # search
+#         self.var_com_search = StringVar()
+#         com_txt_search = ttk.Combobox(search_frame, textvariable=self.var_com_search,
+#                                       state="readonly", font=("arial", 12, "bold"), width=18)
 
-        com_txt_search['value'] = (
-            "Select Option", "citizen_phone", "citizen_aadhar")
-        com_txt_search.current(0)
-        com_txt_search.grid(row=0, column=1, sticky=W, padx=5)
+#         com_txt_search['value'] = (
+#             "Select Option", "citizen_phone", "citizen_aadhar")
+#         com_txt_search.current(0)
+#         com_txt_search.grid(row=0, column=1, sticky=W, padx=5)
 
-        self.var_search = StringVar()
-        txt_search = ttk.Entry(
-            search_frame, textvariable=self.var_search, width=22, font=("arial", 11, "bold"))
-        txt_search.grid(row=0, column=2, padx=5)
+#         self.var_search = StringVar()
+#         txt_search = ttk.Entry(
+#             search_frame, textvariable=self.var_search, width=22, font=("arial", 11, "bold"))
+#         txt_search.grid(row=0, column=2, padx=5)
 
-        btn_search = Button(search_frame, bg='blue', text='Search', command=self.search_data, font=(
-            'arial', 11, 'bold'), fg='white', width=14)
-        btn_search.grid(row=0, column=3, padx=5)
+#         btn_search = Button(search_frame, bg='blue', text='Search', command=self.search_data, font=(
+#             'arial', 11, 'bold'), fg='white', width=14)
+#         btn_search.grid(row=0, column=3, padx=5)
 
-        btn_ShowAll = Button(search_frame, bg='blue', text="Show All", command=self.fetch_data, font=(
-            'arial', 11, 'bold'), fg='white', width=14)
-        btn_ShowAll.grid(row=0, column=4, padx=5)
+#         btn_ShowAll = Button(search_frame, bg='blue', text="Show All", command=self.fetch_data, font=(
+#             'arial', 11, 'bold'), fg='white', width=14)
+#         btn_ShowAll.grid(row=0, column=4, padx=5)
 
-        # =========== Citizen table===========
+#         # =========== Citizen table===========
 
-        # Table frame
-        table_frame = Frame(down_frame, bd=3, relief=RIDGE)
-        table_frame.place(x=0, y=48, width=1230, height=130)
+#         # Table frame
+#         table_frame = Frame(down_frame, bd=3, relief=RIDGE)
+#         table_frame.place(x=0, y=48, width=1230, height=130)
 
-        scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
-        scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
+#         scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
+#         scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
 
-        self.citizen_table = ttk.Treeview(table_frame, column=("citizen_name", "citizen_age",  "citizen_dob","citizen_gender", "citizen_phone", "citizen_email", "citizen_aadhar","citizen_pan",
-                                          "citizen_occupation", "citizen_disability", "citizen_city", "citizen_bank_accno", "citizen_bank_ifsc"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
-        scroll_x.pack(side=BOTTOM, fill=X)
-        scroll_y.pack(side=RIGHT, fill=Y)
-        scroll_x.config(command=self.citizen_table.xview)
-        scroll_y.config(command=self.citizen_table.yview)
+#         self.citizen_table = ttk.Treeview(table_frame, column=("citizen_name", "citizen_age",  "citizen_dob","citizen_gender", "citizen_phone", "citizen_email", "citizen_aadhar","citizen_pan",
+#                                           "citizen_occupation", "citizen_disability", "citizen_city", "citizen_bank_accno", "citizen_bank_ifsc"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+#         scroll_x.pack(side=BOTTOM, fill=X)
+#         scroll_y.pack(side=RIGHT, fill=Y)
+#         scroll_x.config(command=self.citizen_table.xview)
+#         scroll_y.config(command=self.citizen_table.yview)
 
-        # self.citizen_table.heading('citizen_id', text='ID')
-        self.citizen_table.heading('citizen_name', text='Name')
-        self.citizen_table.heading('citizen_age', text='Age')
-        self.citizen_table.heading('citizen_dob', text='DOB')
-        self.citizen_table.heading('citizen_gender', text='Gender')
-        self.citizen_table.heading('citizen_phone', text='Phone No')
-        self.citizen_table.heading('citizen_email', text='Email')
-        self.citizen_table.heading('citizen_aadhar', text='Aadhar')
-        self.citizen_table.heading('citizen_pan', text='PAN')
-        self.citizen_table.heading('citizen_occupation', text='Occupation')
-        self.citizen_table.heading('citizen_disability', text='Disability')
-        self.citizen_table.heading('citizen_city', text='City')
-        self.citizen_table.heading('citizen_bank_accno', text='Bank Acc No')
-        self.citizen_table.heading('citizen_bank_ifsc', text='IFSC Code')
-        # self.citizen_table.heading('country', text='Country')
-        # self.citizen_table.heading('salary', text='Salary')
+#         # self.citizen_table.heading('citizen_id', text='ID')
+#         self.citizen_table.heading('citizen_name', text='Name')
+#         self.citizen_table.heading('citizen_age', text='Age')
+#         self.citizen_table.heading('citizen_dob', text='DOB')
+#         self.citizen_table.heading('citizen_gender', text='Gender')
+#         self.citizen_table.heading('citizen_phone', text='Phone No')
+#         self.citizen_table.heading('citizen_email', text='Email')
+#         self.citizen_table.heading('citizen_aadhar', text='Aadhar')
+#         self.citizen_table.heading('citizen_pan', text='PAN')
+#         self.citizen_table.heading('citizen_occupation', text='Occupation')
+#         self.citizen_table.heading('citizen_disability', text='Disability')
+#         self.citizen_table.heading('citizen_city', text='City')
+#         self.citizen_table.heading('citizen_bank_accno', text='Bank Acc No')
+#         self.citizen_table.heading('citizen_bank_ifsc', text='IFSC Code')
+#         # self.citizen_table.heading('country', text='Country')
+#         # self.citizen_table.heading('salary', text='Salary')
 
-        self.citizen_table['show'] = 'headings'
-        # self.citizen_table.column('citizen_id', width=100)
-        self.citizen_table.column('citizen_name', width=100)
-        self.citizen_table.column('citizen_age', width=100)
-        self.citizen_table.column('citizen_dob', width=100)
-        self.citizen_table.column('citizen_phone', width=100)
-        self.citizen_table.column('citizen_aadhar', width=100)
-        self.citizen_table.column('citizen_pan', width=100)
-        self.citizen_table.column('citizen_occupation', width=100)
-        self.citizen_table.column('citizen_disability', width=100)
-        self.citizen_table.column('citizen_city', width=100)
-        self.citizen_table.column('citizen_bank_accno', width=100)
-        self.citizen_table.column('citizen_bank_ifsc', width=100)
-        # self.citizen_table.column('country', width=100)
-        # self.citizen_table.column('salary', width=100)
+#         self.citizen_table['show'] = 'headings'
+#         # self.citizen_table.column('citizen_id', width=100)
+#         self.citizen_table.column('citizen_name', width=100)
+#         self.citizen_table.column('citizen_age', width=100)
+#         self.citizen_table.column('citizen_dob', width=100)
+#         self.citizen_table.column('citizen_phone', width=100)
+#         self.citizen_table.column('citizen_aadhar', width=100)
+#         self.citizen_table.column('citizen_pan', width=100)
+#         self.citizen_table.column('citizen_occupation', width=100)
+#         self.citizen_table.column('citizen_disability', width=100)
+#         self.citizen_table.column('citizen_city', width=100)
+#         self.citizen_table.column('citizen_bank_accno', width=100)
+#         self.citizen_table.column('citizen_bank_ifsc', width=100)
+#         # self.citizen_table.column('country', width=100)
+#         # self.citizen_table.column('salary', width=100)
 
-        self.citizen_table.pack(fill=BOTH, expand=1)
+#         self.citizen_table.pack(fill=BOTH, expand=1)
 
-        self.citizen_table.bind("<ButtonRelease>", self.get_cursor)
+#         self.citizen_table.bind("<ButtonRelease>", self.get_cursor)
 
-        self.fetch_data()
+#         self.fetch_data()
 
     # *************Function Declarations****************
 
