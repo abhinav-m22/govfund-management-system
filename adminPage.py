@@ -411,14 +411,14 @@ class Admin:
 
             self.fetch_data_citizen()
             
-        def archive():
+        def LoanArchive():
             table_frame = Frame(down_frame)
             table_frame.place(x=0, y=0, width=1470, height=500)
 
             scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
             scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
 
-            self.citizen_table = ttk.Treeview(table_frame, column=("action", "new_aadhar",  "date","old_aadhar"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+            self.citizen_table = ttk.Treeview(table_frame, column=("action","loan_amount", "new_aadhar",  "date"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
 
             scroll_x.pack(side=BOTTOM, fill=X)
             scroll_y.pack(side=RIGHT, fill=Y)
@@ -426,29 +426,107 @@ class Admin:
             scroll_y.config(command=self.citizen_table.yview)
 
             self.citizen_table.heading('action', text='Action')
-            self.citizen_table.heading('new_aadhar', text='New Aadhar')
+            self.citizen_table.heading('loan_amount', text='Loan Amount')
+            self.citizen_table.heading('new_aadhar', text='Aadhar')
             self.citizen_table.heading('date', text='Date')
-            self.citizen_table.heading('old_aadhar', text='Old Aadhar')
 
             self.citizen_table['show'] = 'headings'
 
             self.citizen_table.column('action', width=100)
+            self.citizen_table.column('loan_amount', width=100)
             self.citizen_table.column('new_aadhar', width=100)
             self.citizen_table.column('date', width=100)
-            self.citizen_table.column('old_aadhar', width=100)
 
             self.citizen_table.pack(fill=BOTH, expand=1)
 
             self.citizen_table.bind("<ButtonRelease>", self.get_cursor)
 
-            self.fetch_data_archive()
+            self.fetch_data_archive_loan()
+
+        def PensionArchive():
+            table_frame = Frame(down_frame)
+            table_frame.place(x=0, y=0, width=1470, height=500)
+
+            scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
+            scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
+
+            self.citizen_table = ttk.Treeview(table_frame, column=("action", "retirement_year","new_aadhar",  "date"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+
+            scroll_x.pack(side=BOTTOM, fill=X)
+            scroll_y.pack(side=RIGHT, fill=Y)
+            scroll_x.config(command=self.citizen_table.xview)
+            scroll_y.config(command=self.citizen_table.yview)
+
+            self.citizen_table.heading('action', text='Action')
+            self.citizen_table.heading('retirement_year', text='Retirement Year')
+            self.citizen_table.heading('new_aadhar', text='Aadhar')
+            self.citizen_table.heading('date', text='Date')
+
+            self.citizen_table['show'] = 'headings'
+
+            self.citizen_table.column('action', width=100)
+            self.citizen_table.column('retirement_year', width=100)
+            self.citizen_table.column('new_aadhar', width=100)
+            self.citizen_table.column('date', width=100)
+
+            self.citizen_table.pack(fill=BOTH, expand=1)
+
+            self.citizen_table.bind("<ButtonRelease>", self.get_cursor)
+
+            self.fetch_data_archive_pension()
+
+        def ScholarshipArchive():
+            table_frame = Frame(down_frame)
+            table_frame.place(x=0, y=0, width=1470, height=500)
+
+            scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
+            scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
+
+            self.citizen_table = ttk.Treeview(table_frame, column=("action", "marks",  "caste","new_aadhar","date"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+
+            scroll_x.pack(side=BOTTOM, fill=X)
+            scroll_y.pack(side=RIGHT, fill=Y)
+            scroll_x.config(command=self.citizen_table.xview)
+            scroll_y.config(command=self.citizen_table.yview)
+
+            self.citizen_table.heading('action', text='Action')
+            self.citizen_table.heading('marks', text='Marks')
+            self.citizen_table.heading('caste', text='Caste')
+            self.citizen_table.heading('new_aadhar', text='Aadhar')
+            self.citizen_table.heading('date', text='Date')
+
+            self.citizen_table['show'] = 'headings'
+
+            self.citizen_table.column('action', width=100)
+            self.citizen_table.column('marks', width=100)
+            self.citizen_table.column('caste', width=100)
+            self.citizen_table.column('new_aadhar', width=100)
+            self.citizen_table.column('date', width=100)
+
+            self.citizen_table.pack(fill=BOTH, expand=1)
+
+            self.citizen_table.bind("<ButtonRelease>", self.get_cursor)
+
+            self.fetch_data_archive_scholarship()
 
 
         img_logo = Image.open("images/history.png")
         img_logo = img_logo.resize((50, 50), Image.ANTIALIAS)
         self.photo_logo = ImageTk.PhotoImage(img_logo)
-        self.my_button = Button(root, image=self.photo_logo, command=archive, bd=0)
+        self.my_button = Button(root, image=self.photo_logo, command=LoanArchive, bd=0)
         self.my_button.place(x=1400, y=50, width=50, height=50)
+
+        img_logo1 = Image.open("images/logo.jpg")
+        img_logo1 = img_logo1.resize((50, 50), Image.ANTIALIAS)
+        self.photo_logo1 = ImageTk.PhotoImage(img_logo1)
+        self.my_button1 = Button(root, image=self.photo_logo1, command=PensionArchive, bd=0)
+        self.my_button1.place(x=1300, y=50, width=50, height=50)
+
+        img_logo2 = Image.open("images/marks.jpg")
+        img_logo2 = img_logo2.resize((50, 50), Image.ANTIALIAS)
+        self.photo_logo2 = ImageTk.PhotoImage(img_logo)
+        self.my_button2 = Button(root, image=self.photo_logo2, command=ScholarshipArchive, bd=0)
+        self.my_button2.place(x=1200, y=50, width=50, height=50)
 
         Button(root, width=25, pady=7, text='Loan', bg='#57a1f8',
                fg='white', border=0, font=('Microsoft YaHei UI Light', 16, 'bold'), command=loanProcedure) .place(x=30, y=150)
@@ -621,11 +699,39 @@ class Admin:
             conn.commit()
         conn.close()
 
-    def fetch_data_archive(self):
+    def fetch_data_archive_loan(self):
         conn = mysql.connector.connect(
             host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
         my_cursor = conn.cursor()
-        my_cursor.execute('select * from verification')
+        my_cursor.execute('select * from loanVer')
+        data = my_cursor.fetchall()
+        print(data)
+        if len(data) != 0:
+            self.citizen_table.delete(*self.citizen_table.get_children())
+            for i in data:
+                self.citizen_table.insert("", END, values=i)
+            conn.commit()
+        conn.close()
+
+    def fetch_data_archive_pension(self):
+        conn = mysql.connector.connect(
+            host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
+        my_cursor = conn.cursor()
+        my_cursor.execute('select * from pensionVer')
+        data = my_cursor.fetchall()
+        print(data)
+        if len(data) != 0:
+            self.citizen_table.delete(*self.citizen_table.get_children())
+            for i in data:
+                self.citizen_table.insert("", END, values=i)
+            conn.commit()
+        conn.close()
+    
+    def fetch_data_archive_scholarship(self):
+        conn = mysql.connector.connect(
+            host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
+        my_cursor = conn.cursor()
+        my_cursor.execute('select * from marksVer')
         data = my_cursor.fetchall()
         print(data)
         if len(data) != 0:
