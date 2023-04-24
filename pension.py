@@ -114,7 +114,7 @@ class Pension:
         button_frame.place(x=1040, y=0, width=180, height=210)
 
         btn_add = Button(button_frame, text="Apply", font=(
-            'arial', 15, 'bold'), width=13, bg='blue', fg='white')
+            'arial', 15, 'bold'), width=13, bg='blue', fg='white',command=self.add_data)
         btn_add.grid(row=0, column=0, padx=1, pady=5)
 
         btn_clear = Button(button_frame, text="Clear", font=(
@@ -130,13 +130,14 @@ class Pension:
                 host='localhost', user=Username, password=MySQLPassword, database=DatabaseName)
             my_cursor = conn.cursor()
             age = int(self.var_age.get())
+            salary=int(self.var_salary.get())
             my_cursor.execute('insert into pension values(%s,%s,%s,%s,%s)', (
 
                 # Variables
                 self.var_name.get(),
                 self.var_aadhar.get(),
                 age,
-                self.var_salary.get(),
+                salary,
                 self.var_retYear.get()
 
             ))
